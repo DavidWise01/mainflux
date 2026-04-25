@@ -1,0 +1,18 @@
+#! things-db-expose.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Service
+metadata:
+    name: things-db
+    namespace: docker
+    labels:
+        com.docker.compose.project: docker
+        com.docker.compose.service: things-db
+spec:
+    selector:
+        com.docker.compose.project: docker
+        com.docker.compose.service: things-db
+    ports:
+        - name: things-db-5432
+          port: 5432
+          targetPort: things-db-5432

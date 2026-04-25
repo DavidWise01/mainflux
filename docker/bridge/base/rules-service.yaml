@@ -1,0 +1,21 @@
+#! rules-service.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Service
+metadata:
+    name: rules-published
+    namespace: docker
+    labels:
+        com.docker.compose.project: docker
+        com.docker.compose.service: rules
+spec:
+    selector:
+        com.docker.compose.project: docker
+        com.docker.compose.service: rules
+    ports:
+        - name: rules-9027
+          port: 9027
+          protocol: TCP
+          targetPort: rules-9027
+
+# check if there is at least one published port

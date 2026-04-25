@@ -1,0 +1,21 @@
+#! auth-expose.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Service
+metadata:
+    name: auth
+    namespace: docker
+    labels:
+        com.docker.compose.project: docker
+        com.docker.compose.service: auth
+spec:
+    selector:
+        com.docker.compose.project: docker
+        com.docker.compose.service: auth
+    ports:
+        - name: auth-8181
+          port: 8181
+          targetPort: auth-8181
+        - name: auth-8189
+          port: 8189
+          targetPort: auth-8189

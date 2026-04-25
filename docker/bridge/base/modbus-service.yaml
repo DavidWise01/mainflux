@@ -1,0 +1,21 @@
+#! modbus-service.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Service
+metadata:
+    name: modbus-published
+    namespace: docker
+    labels:
+        com.docker.compose.project: docker
+        com.docker.compose.service: modbus
+spec:
+    selector:
+        com.docker.compose.project: docker
+        com.docker.compose.service: modbus
+    ports:
+        - name: modbus-9028
+          port: 9028
+          protocol: TCP
+          targetPort: modbus-9028
+
+# check if there is at least one published port

@@ -1,0 +1,47 @@
+#! broker-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: broker
+    namespace: docker
+    labels:
+        com.docker.compose.project: docker
+        com.docker.compose.service: broker
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            com.docker.compose.project: docker
+            com.docker.compose.service: broker
+    strategy:
+        type: Recreate
+    template:
+        metadata:
+            labels:
+                com.docker.compose.project: docker
+                com.docker.compose.service: broker
+                com.docker.compose.network.mainfluxlabs-base-net: "true"
+        spec:
+            restartPolicy: OnFailure
+            containers:
+                - name: mainfluxlabs-broker
+                  image: nats:2.2.4-alpine
+                  imagePullPolicy: IfNotPresent
+                  args:
+                    - -c
+                    - /etc/nats/nats.conf
+                  ports:
+                    - name: broker-4222
+                      containerPort: 4222
+                    - name: broker-6222
+                      containerPort: 6222
+                    - name: broker-8222
+                      containerPort: 8222
+                  volumeMounts:
+                    - name: etc-nats
+                      mountPath: /etc/nats
+            volumes:
+                - name: etc-nats
+                  hostPath:
+                    path: C:\Users\Dave\Desktop\the-garden\mainflux\docker\nats

@@ -1,0 +1,21 @@
+#! uiconfigs-service.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Service
+metadata:
+    name: uiconfigs-published
+    namespace: docker
+    labels:
+        com.docker.compose.project: docker
+        com.docker.compose.service: uiconfigs
+spec:
+    selector:
+        com.docker.compose.project: docker
+        com.docker.compose.service: uiconfigs
+    ports:
+        - name: uiconfigs-9029
+          port: 9029
+          protocol: TCP
+          targetPort: uiconfigs-9029
+
+# check if there is at least one published port

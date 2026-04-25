@@ -1,0 +1,45 @@
+#! mosquitto-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: mosquitto
+    namespace: docker
+    labels:
+        com.docker.compose.project: docker
+        com.docker.compose.service: mosquitto
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            com.docker.compose.project: docker
+            com.docker.compose.service: mosquitto
+    strategy:
+        type: Recreate
+    template:
+        metadata:
+            labels:
+                com.docker.compose.project: docker
+                com.docker.compose.service: mosquitto
+                com.docker.compose.network.mainfluxlabs-base-net: "true"
+        spec:
+            restartPolicy: OnFailure
+            containers:
+                - name: mainfluxlabs-mosquitto
+                  image: eclipse-mosquitto:2.0
+                  imagePullPolicy: IfNotPresent
+                  ports:
+                    - name: mosquitto-1883
+                      containerPort: 1883
+                  volumeMounts:
+                    - name: mosquitto-data
+                      mountPath: /mosquitto/data
+                    - name: mosquitto-config-mosquitto-conf
+                      mountPath: /mosquitto/config/mosquitto.conf
+            volumes:
+                - name: mosquitto-data
+                  persistentVolumeClaim:
+                    claimName: mosquitto-mainfluxlabs-mqtt-broker-volume
+                - name: mosquitto-config-mosquitto-conf
+                  hostPath:
+                    path: C:\Users\Dave\Desktop\the-garden\mainflux\docker\mosquitto\mosquitto.conf

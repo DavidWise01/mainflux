@@ -1,0 +1,18 @@
+#! mqtt-adapter-expose.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Service
+metadata:
+    name: mqtt-adapter
+    namespace: docker
+    labels:
+        com.docker.compose.project: docker
+        com.docker.compose.service: mqtt-adapter
+spec:
+    selector:
+        com.docker.compose.project: docker
+        com.docker.compose.service: mqtt-adapter
+    ports:
+        - name: mqtt-adapt-8285
+          port: 8285
+          targetPort: mqtt-adapt-8285

@@ -1,0 +1,19 @@
+#! ws-adapter-service.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Service
+metadata:
+    name: ws-adapter-published
+    namespace: docker
+    labels:
+        com.docker.compose.project: docker
+        com.docker.compose.service: ws-adapter
+spec:
+    selector:
+        com.docker.compose.project: docker
+        com.docker.compose.service: ws-adapter
+    ports:
+        - name: ws-adapter-8190
+          port: 8190
+          protocol: TCP
+          targetPort: ws-adapter-8190

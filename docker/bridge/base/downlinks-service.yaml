@@ -1,0 +1,21 @@
+#! downlinks-service.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Service
+metadata:
+    name: downlinks-published
+    namespace: docker
+    labels:
+        com.docker.compose.project: docker
+        com.docker.compose.service: downlinks
+spec:
+    selector:
+        com.docker.compose.project: docker
+        com.docker.compose.service: downlinks
+    ports:
+        - name: downlinks-9025
+          port: 9025
+          protocol: TCP
+          targetPort: downlinks-9025
+
+# check if there is at least one published port

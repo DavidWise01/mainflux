@@ -1,0 +1,18 @@
+#! rules-expose.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Service
+metadata:
+    name: rules
+    namespace: docker
+    labels:
+        com.docker.compose.project: docker
+        com.docker.compose.service: rules
+spec:
+    selector:
+        com.docker.compose.project: docker
+        com.docker.compose.service: rules
+    ports:
+        - name: rules-9027
+          port: 9027
+          targetPort: rules-9027

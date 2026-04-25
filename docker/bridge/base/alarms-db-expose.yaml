@@ -1,0 +1,18 @@
+#! alarms-db-expose.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Service
+metadata:
+    name: alarms-db
+    namespace: docker
+    labels:
+        com.docker.compose.project: docker
+        com.docker.compose.service: alarms-db
+spec:
+    selector:
+        com.docker.compose.project: docker
+        com.docker.compose.service: alarms-db
+    ports:
+        - name: alarms-db-5432
+          port: 5432
+          targetPort: alarms-db-5432

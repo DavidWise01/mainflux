@@ -1,0 +1,23 @@
+# check if there is at least one published port
+
+#! alarms-service.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Service
+metadata:
+    name: alarms-published
+    namespace: docker
+    labels:
+        com.docker.compose.project: docker
+        com.docker.compose.service: alarms
+spec:
+    selector:
+        com.docker.compose.project: docker
+        com.docker.compose.service: alarms
+    ports:
+        - name: alarms-9026
+          port: 9026
+          protocol: TCP
+          targetPort: alarms-9026
+
+# check if there is at least one published port

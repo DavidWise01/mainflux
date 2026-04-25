@@ -1,0 +1,25 @@
+#! coap-adapter-service.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Service
+metadata:
+    name: coap-adapter-published
+    namespace: docker
+    labels:
+        com.docker.compose.project: docker
+        com.docker.compose.service: coap-adapter
+spec:
+    selector:
+        com.docker.compose.project: docker
+        com.docker.compose.service: coap-adapter
+    ports:
+        - name: coap-adapt-5683
+          port: 5683
+          protocol: UDP
+          targetPort: coap-adapt-5683
+        - name: coap-adapt-5683
+          port: 5683
+          protocol: TCP
+          targetPort: coap-adapt-5683
+
+# check if there is at least one published port

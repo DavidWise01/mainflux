@@ -1,0 +1,50 @@
+#! jaeger-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: jaeger
+    namespace: docker
+    labels:
+        com.docker.compose.project: docker
+        com.docker.compose.service: jaeger
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            com.docker.compose.project: docker
+            com.docker.compose.service: jaeger
+    strategy:
+        type: Recreate
+    template:
+        metadata:
+            labels:
+                com.docker.compose.project: docker
+                com.docker.compose.service: jaeger
+                com.docker.compose.network.mainfluxlabs-base-net: "true"
+        spec:
+            containers:
+                - name: mainfluxlabs-jaeger
+                  image: jaegertracing/all-in-one:1.53
+                  imagePullPolicy: IfNotPresent
+                  ports:
+                    - name: jaeger-4318
+                      containerPort: 4318
+                    - name: jaeger-5778
+                      containerPort: 5778
+                    - name: jaeger-6831
+                      containerPort: 6831
+                    - name: jaeger-14250
+                      containerPort: 14250
+                    - name: jaeger-14268
+                      containerPort: 14268
+                    - name: jaeger-4317
+                      containerPort: 4317
+                    - name: jaeger-16686
+                      containerPort: 16686
+                    - name: jaeger-5775
+                      containerPort: 5775
+                    - name: jaeger-9411
+                      containerPort: 9411
+                    - name: jaeger-6832
+                      containerPort: 6832

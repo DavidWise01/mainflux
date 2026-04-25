@@ -1,0 +1,18 @@
+#! postgres-reader-expose.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Service
+metadata:
+    name: postgres-reader
+    namespace: docker
+    labels:
+        com.docker.compose.project: docker
+        com.docker.compose.service: postgres-reader
+spec:
+    selector:
+        com.docker.compose.project: docker
+        com.docker.compose.service: postgres-reader
+    ports:
+        - name: postgres-r-8905
+          port: 8905
+          targetPort: postgres-r-8905

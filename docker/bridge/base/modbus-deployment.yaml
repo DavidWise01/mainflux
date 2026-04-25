@@ -1,0 +1,64 @@
+#! modbus-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: modbus
+    namespace: docker
+    labels:
+        com.docker.compose.project: docker
+        com.docker.compose.service: modbus
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            com.docker.compose.project: docker
+            com.docker.compose.service: modbus
+    strategy:
+        type: Recreate
+    template:
+        metadata:
+            labels:
+                com.docker.compose.project: docker
+                com.docker.compose.service: modbus
+                com.docker.compose.network.mainfluxlabs-base-net: "true"
+        spec:
+            restartPolicy: OnFailure
+            containers:
+                - name: mainfluxlabs-modbus
+                  image: mainfluxlabs/modbus:v0.39.0
+                  imagePullPolicy: IfNotPresent
+                  env:
+                    - name: MF_BROKER_URL
+                      value: "nats://broker:4222"
+                    - name: MF_JAEGER_URL
+                      value: "jaeger:6831"
+                    - name: MF_MODBUS_DB
+                      value: "modbus"
+                    - name: MF_MODBUS_DB_HOST
+                      value: "modbus-db"
+                    - name: MF_MODBUS_DB_PASS
+                      value: "mainflux"
+                    - name: MF_MODBUS_DB_PORT
+                      value: "5432"
+                    - name: MF_MODBUS_DB_USER
+                      value: "mainflux"
+                    - name: MF_MODBUS_ES_URL
+                      value: "redis://es-redis:6379/0"
+                    - name: MF_MODBUS_EVENT_CONSUMER
+                      value: "modbus"
+                    - name: MF_MODBUS_HTTP_PORT
+                      value: "9028"
+                    - name: MF_MODBUS_LOG_LEVEL
+                      value: "debug"
+                    - name: MF_MODBUS_SERVER_CERT
+                      value: ""
+                    - name: MF_MODBUS_SERVER_KEY
+                      value: ""
+                    - name: MF_THINGS_AUTH_GRPC_TIMEOUT
+                      value: "1s"
+                    - name: MF_THINGS_AUTH_GRPC_URL
+                      value: "things:8183"
+                  ports:
+                    - name: modbus-9028
+                      containerPort: 9028

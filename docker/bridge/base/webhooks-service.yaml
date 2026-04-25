@@ -1,0 +1,21 @@
+#! webhooks-service.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Service
+metadata:
+    name: webhooks-published
+    namespace: docker
+    labels:
+        com.docker.compose.project: docker
+        com.docker.compose.service: webhooks
+spec:
+    selector:
+        com.docker.compose.project: docker
+        com.docker.compose.service: webhooks
+    ports:
+        - name: webhooks-9021
+          port: 9021
+          protocol: TCP
+          targetPort: webhooks-9021
+
+# check if there is at least one published port

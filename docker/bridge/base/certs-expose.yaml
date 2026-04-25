@@ -1,0 +1,18 @@
+#! certs-expose.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Service
+metadata:
+    name: certs
+    namespace: docker
+    labels:
+        com.docker.compose.project: docker
+        com.docker.compose.service: certs
+spec:
+    selector:
+        com.docker.compose.project: docker
+        com.docker.compose.service: certs
+    ports:
+        - name: certs-8204
+          port: 8204
+          targetPort: certs-8204

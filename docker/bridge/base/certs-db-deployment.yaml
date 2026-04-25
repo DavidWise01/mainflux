@@ -1,0 +1,47 @@
+#! certs-db-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: certs-db
+    namespace: docker
+    labels:
+        com.docker.compose.project: docker
+        com.docker.compose.service: certs-db
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            com.docker.compose.project: docker
+            com.docker.compose.service: certs-db
+    strategy:
+        type: Recreate
+    template:
+        metadata:
+            labels:
+                com.docker.compose.project: docker
+                com.docker.compose.service: certs-db
+                com.docker.compose.network.mainfluxlabs-base-net: "true"
+        spec:
+            restartPolicy: OnFailure
+            containers:
+                - name: mainfluxlabs-certs-db
+                  image: postgres:13.3-alpine
+                  imagePullPolicy: IfNotPresent
+                  env:
+                    - name: POSTGRES_DB
+                      value: "certs"
+                    - name: POSTGRES_PASSWORD
+                      value: "mainflux"
+                    - name: POSTGRES_USER
+                      value: "mainflux"
+                  ports:
+                    - name: certs-db-5432
+                      containerPort: 5432
+                  volumeMounts:
+                    - name: var-lib-postgresql-data
+                      mountPath: /var/lib/postgresql/data
+            volumes:
+                - name: var-lib-postgresql-data
+                  persistentVolumeClaim:
+                    claimName: certs-db-mainfluxlabs-certs-db-volume

@@ -1,0 +1,50 @@
+#! kustomization.yaml
+# Generated code, do not edit
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+    - ../../base
+patches:
+    - path: alarms-db-mainfluxlabs-alarms-db-volume-persistentVolumeClaim.yaml
+    - path: alarms-service.yaml
+    - path: auth-db-mainfluxlabs-auth-db-volume-persistentVolumeClaim.yaml
+    - path: auth-redis-mainfluxlabs-auth-redis-volume-persistentVolumeClaim.yaml
+    - path: auth-service.yaml
+    - path: broker-service.yaml
+    - path: certs-db-mainfluxlabs-certs-db-volume-persistentVolumeClaim.yaml
+    - path: certs-mainfluxlabs-crl-volume-persistentVolumeClaim.yaml
+    - path: certs-service.yaml
+    - path: coap-adapter-service.yaml
+    - path: converters-service.yaml
+    - path: downlinks-db-mainfluxlabs-downlinks-db-volume-persistentVolumeClaim.yaml
+    - path: downlinks-service.yaml
+    - path: es-redis-mainfluxlabs-es-redis-volume-persistentVolumeClaim.yaml
+    - path: filestore-db-mainfluxlabs-filestore-db-volume-persistentVolumeClaim.yaml
+    - path: filestore-mainfluxlabs-filestore-volume-persistentVolumeClaim.yaml
+    - path: filestore-service.yaml
+    - path: http-adapter-service.yaml
+    - path: jaeger-service.yaml
+    - path: modbus-db-mainfluxlabs-modbus-db-volume-persistentVolumeClaim.yaml
+    - path: modbus-service.yaml
+    - path: mosquitto-mainfluxlabs-mqtt-broker-volume-persistentVolumeClaim.yaml
+    - path: mqtt-adapter-service.yaml
+    - path: mqtt-db-mainfluxlabs-mqtt-db-volume-persistentVolumeClaim.yaml
+    - path: nginx-mainfluxlabs-crl-volume-persistentVolumeClaim.yaml
+    - path: nginx-service.yaml
+    - path: postgres-mainfluxlabs-postgres-volume-persistentVolumeClaim.yaml
+    - path: postgres-reader-service.yaml
+    - path: postgres-writer-service.yaml
+    - path: rules-db-mainfluxlabs-rules-db-volume-persistentVolumeClaim.yaml
+    - path: rules-service.yaml
+    - path: smtp-notifier-db-mainfluxlabs-smtp-notifier-db-volume-persistentVolumeClaim.yaml
+    - path: smtp-notifier-service.yaml
+    - path: things-db-mainfluxlabs-things-db-volume-persistentVolumeClaim.yaml
+    - path: things-service.yaml
+    - path: ui-service.yaml
+    - path: uiconfigs-db-mainfluxlabs-uiconfigs-db-volume-persistentVolumeClaim.yaml
+    - path: uiconfigs-service.yaml
+    - path: users-db-mainfluxlabs-users-db-volume-persistentVolumeClaim.yaml
+    - path: users-service.yaml
+    - path: webhooks-db-mainfluxlabs-webhooks-db-volume-persistentVolumeClaim.yaml
+    - path: webhooks-service.yaml
+    - path: ws-adapter-service.yaml

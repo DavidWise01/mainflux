@@ -1,0 +1,126 @@
+#! users-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: users
+    namespace: docker
+    labels:
+        com.docker.compose.project: docker
+        com.docker.compose.service: users
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            com.docker.compose.project: docker
+            com.docker.compose.service: users
+    strategy:
+        type: Recreate
+    template:
+        metadata:
+            labels:
+                com.docker.compose.project: docker
+                com.docker.compose.service: users
+                com.docker.compose.network.mainfluxlabs-base-net: "true"
+        spec:
+            restartPolicy: OnFailure
+            containers:
+                - name: mainfluxlabs-users
+                  image: mainfluxlabs/users:v0.39.0
+                  imagePullPolicy: IfNotPresent
+                  env:
+                    - name: MF_AUTH_GRPC_TIMEOUT
+                      value: "1s"
+                    - name: MF_AUTH_GRPC_URL
+                      value: "auth:8181"
+                    - name: MF_EMAIL_FROM_ADDRESS
+                      value: "from@example.com"
+                    - name: MF_EMAIL_FROM_NAME
+                      value: "Example"
+                    - name: MF_EMAIL_HOST
+                      value: "smtp.mailtrap.io"
+                    - name: MF_EMAIL_PASSWORD
+                      value: "12345678"
+                    - name: MF_EMAIL_PORT
+                      value: "2525"
+                    - name: MF_EMAIL_TEMPLATES_DIR
+                      value: "/"
+                    - name: MF_EMAIL_USERNAME
+                      value: "example@example.com"
+                    - name: MF_GITHUB_CLIENT_ID
+                      value: "github-client-id"
+                    - name: MF_GITHUB_CLIENT_SECRET
+                      value: "github-client-secret"
+                    - name: MF_GITHUB_REDIRECT_URL
+                      value: "/users/oauth/github/callback"
+                    - name: MF_GITHUB_USER_EMAILS
+                      value: "https://api.github.com/user/emails"
+                    - name: MF_GITHUB_USER_INFO
+                      value: "https://api.github.com/user"
+                    - name: MF_GOOGLE_CLIENT_ID
+                      value: "google-client-id.apps.googleusercontent.com"
+                    - name: MF_GOOGLE_CLIENT_SECRET
+                      value: "google-client-secret"
+                    - name: MF_GOOGLE_REDIRECT_URL
+                      value: "/users/oauth/google/callback"
+                    - name: MF_GOOGLE_USER_INFO
+                      value: "https://www.googleapis.com/oauth2/v2/userinfo"
+                    - name: MF_HOST
+                      value: "http://localhost"
+                    - name: MF_INVITE_DURATION
+                      value: "168h"
+                    - name: MF_JAEGER_URL
+                      value: "jaeger:6831"
+                    - name: MF_REDIRECT_LOGIN_URL
+                      value: "/auth/login"
+                    - name: MF_REQUIRE_EMAIL_VERIFICATION
+                      value: "false"
+                    - name: MF_USERS_ADMIN_EMAIL
+                      value: "admin@example.com"
+                    - name: MF_USERS_ADMIN_PASSWORD
+                      value: "12345678"
+                    - name: MF_USERS_DB
+                      value: "users"
+                    - name: MF_USERS_DB_HOST
+                      value: "users-db"
+                    - name: MF_USERS_DB_PASS
+                      value: "mainflux"
+                    - name: MF_USERS_DB_PORT
+                      value: "5432"
+                    - name: MF_USERS_DB_USER
+                      value: "mainflux"
+                    - name: MF_USERS_GRPC_PORT
+                      value: "8184"
+                    - name: MF_USERS_HTTP_PORT
+                      value: "8180"
+                    - name: MF_USERS_LOG_LEVEL
+                      value: "debug"
+                    - name: MF_USERS_SELF_REGISTER_ENABLED
+                      value: "true"
+                  ports:
+                    - name: users-8184
+                      containerPort: 8184
+                    - name: users-8180
+                      containerPort: 8180
+                  volumeMounts:
+                    - name: base-tmpl
+                      mountPath: /base.tmpl
+                    - name: email-verification-tmpl
+                      mountPath: /email_verification.tmpl
+                    - name: password-reset-tmpl
+                      mountPath: /password_reset.tmpl
+                    - name: platform-invite-tmpl
+                      mountPath: /platform_invite.tmpl
+            volumes:
+                - name: base-tmpl
+                  hostPath:
+                    path: C:\Users\Dave\Desktop\the-garden\mainflux\docker\templates\base.tmpl
+                - name: email-verification-tmpl
+                  hostPath:
+                    path: C:\Users\Dave\Desktop\the-garden\mainflux\docker\templates\users\email_verification.tmpl
+                - name: password-reset-tmpl
+                  hostPath:
+                    path: C:\Users\Dave\Desktop\the-garden\mainflux\docker\templates\users\password_reset.tmpl
+                - name: platform-invite-tmpl
+                  hostPath:
+                    path: C:\Users\Dave\Desktop\the-garden\mainflux\docker\templates\users\platform_invite.tmpl

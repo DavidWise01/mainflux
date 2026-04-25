@@ -1,0 +1,33 @@
+#! jaeger-service.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Service
+metadata:
+    name: jaeger-published
+    namespace: docker
+    labels:
+        com.docker.compose.project: docker
+        com.docker.compose.service: jaeger
+spec:
+    selector:
+        com.docker.compose.project: docker
+        com.docker.compose.service: jaeger
+    ports:
+        - name: jaeger-6831
+          port: 6831
+          protocol: UDP
+          targetPort: jaeger-6831
+        - name: jaeger-16686
+          port: 16686
+          protocol: TCP
+          targetPort: jaeger-16686
+        - name: jaeger-14268
+          port: 14268
+          protocol: TCP
+          targetPort: jaeger-14268
+        - name: jaeger-5778
+          port: 5778
+          protocol: TCP
+          targetPort: jaeger-5778
+
+# check if there is at least one published port

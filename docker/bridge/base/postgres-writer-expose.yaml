@@ -1,0 +1,18 @@
+#! postgres-writer-expose.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Service
+metadata:
+    name: postgres-writer
+    namespace: docker
+    labels:
+        com.docker.compose.project: docker
+        com.docker.compose.service: postgres-writer
+spec:
+    selector:
+        com.docker.compose.project: docker
+        com.docker.compose.service: postgres-writer
+    ports:
+        - name: postgres-w-8900
+          port: 8900
+          targetPort: postgres-w-8900

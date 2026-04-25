@@ -1,0 +1,21 @@
+#! mqtt-adapter-service.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Service
+metadata:
+    name: mqtt-adapter-published
+    namespace: docker
+    labels:
+        com.docker.compose.project: docker
+        com.docker.compose.service: mqtt-adapter
+spec:
+    selector:
+        com.docker.compose.project: docker
+        com.docker.compose.service: mqtt-adapter
+    ports:
+        - name: mqtt-adapt-8285
+          port: 8285
+          protocol: TCP
+          targetPort: mqtt-adapt-8285
+
+# check if there is at least one published port

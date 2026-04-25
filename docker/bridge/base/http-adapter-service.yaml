@@ -1,0 +1,21 @@
+#! http-adapter-service.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Service
+metadata:
+    name: http-adapter-published
+    namespace: docker
+    labels:
+        com.docker.compose.project: docker
+        com.docker.compose.service: http-adapter
+spec:
+    selector:
+        com.docker.compose.project: docker
+        com.docker.compose.service: http-adapter
+    ports:
+        - name: http-adapt-8185
+          port: 8185
+          protocol: TCP
+          targetPort: http-adapt-8185
+
+# check if there is at least one published port

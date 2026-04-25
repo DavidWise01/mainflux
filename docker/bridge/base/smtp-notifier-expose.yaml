@@ -1,0 +1,18 @@
+#! smtp-notifier-expose.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Service
+metadata:
+    name: smtp-notifier
+    namespace: docker
+    labels:
+        com.docker.compose.project: docker
+        com.docker.compose.service: smtp-notifier
+spec:
+    selector:
+        com.docker.compose.project: docker
+        com.docker.compose.service: smtp-notifier
+    ports:
+        - name: smtp-notif-9023
+          port: 9023
+          targetPort: smtp-notif-9023

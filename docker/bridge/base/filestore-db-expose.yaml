@@ -1,0 +1,18 @@
+#! filestore-db-expose.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Service
+metadata:
+    name: filestore-db
+    namespace: docker
+    labels:
+        com.docker.compose.project: docker
+        com.docker.compose.service: filestore-db
+spec:
+    selector:
+        com.docker.compose.project: docker
+        com.docker.compose.service: filestore-db
+    ports:
+        - name: filestore--5432
+          port: 5432
+          targetPort: filestore--5432

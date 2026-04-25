@@ -1,0 +1,18 @@
+#! certs-db-mainfluxlabs-certs-db-volume-persistentVolumeClaim.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+    name: certs-db-mainfluxlabs-certs-db-volume
+    namespace: docker
+    labels:
+        com.docker.compose.service: certs-db
+        com.docker.compose.volume: mainfluxlabs-certs-db-volume
+spec:
+    accessModes:
+        # TODO would need to check which services use this volume
+        - ReadWriteOnce
+    volumeMode: Filesystem
+    resources:
+        requests:
+            storage: 100Mi

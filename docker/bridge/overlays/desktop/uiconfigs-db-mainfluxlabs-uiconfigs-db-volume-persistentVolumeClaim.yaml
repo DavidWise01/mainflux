@@ -1,0 +1,9 @@
+#! uiconfigs-db-mainfluxlabs-uiconfigs-db-volume-persistentVolumeClaim.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+    name: uiconfigs-db-mainfluxlabs-uiconfigs-db-volume
+    namespace: docker
+spec:
+    storageClassName: "hostpath" # see docker/desktop-storage-provisioner

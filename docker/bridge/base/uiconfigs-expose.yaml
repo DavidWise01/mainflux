@@ -1,0 +1,18 @@
+#! uiconfigs-expose.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Service
+metadata:
+    name: uiconfigs
+    namespace: docker
+    labels:
+        com.docker.compose.project: docker
+        com.docker.compose.service: uiconfigs
+spec:
+    selector:
+        com.docker.compose.project: docker
+        com.docker.compose.service: uiconfigs
+    ports:
+        - name: uiconfigs-9029
+          port: 9029
+          targetPort: uiconfigs-9029

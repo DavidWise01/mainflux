@@ -1,0 +1,18 @@
+#! filestore-expose.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Service
+metadata:
+    name: filestore
+    namespace: docker
+    labels:
+        com.docker.compose.project: docker
+        com.docker.compose.service: filestore
+spec:
+    selector:
+        com.docker.compose.project: docker
+        com.docker.compose.service: filestore
+    ports:
+        - name: filestore-9022
+          port: 9022
+          targetPort: filestore-9022

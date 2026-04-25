@@ -1,0 +1,9 @@
+#! auth-redis-mainfluxlabs-auth-redis-volume-persistentVolumeClaim.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+    name: auth-redis-mainfluxlabs-auth-redis-volume
+    namespace: docker
+spec:
+    storageClassName: "hostpath" # see docker/desktop-storage-provisioner

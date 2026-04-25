@@ -1,0 +1,18 @@
+#! certs-db-expose.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Service
+metadata:
+    name: certs-db
+    namespace: docker
+    labels:
+        com.docker.compose.project: docker
+        com.docker.compose.service: certs-db
+spec:
+    selector:
+        com.docker.compose.project: docker
+        com.docker.compose.service: certs-db
+    ports:
+        - name: certs-db-5432
+          port: 5432
+          targetPort: certs-db-5432

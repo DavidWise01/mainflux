@@ -1,0 +1,40 @@
+#! ui-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: ui
+    namespace: docker
+    labels:
+        com.docker.compose.project: docker
+        com.docker.compose.service: ui
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            com.docker.compose.project: docker
+            com.docker.compose.service: ui
+    strategy:
+        type: Recreate
+    template:
+        metadata:
+            labels:
+                com.docker.compose.project: docker
+                com.docker.compose.service: ui
+                com.docker.compose.network.mainfluxlabs-base-net: "true"
+        spec:
+            restartPolicy: OnFailure
+            containers:
+                - name: mainfluxlabs-ui
+                  image: mainfluxlabs/ui:v0.39.0
+                  imagePullPolicy: IfNotPresent
+                  env:
+                    - name: MF_UI_PORT
+                      value: "3000"
+                    - name: MF_USERS_SELF_REGISTER_ENABLED
+                      value: "true"
+                  ports:
+                    - name: ui-80
+                      containerPort: 80
+                    - name: ui-3000
+                      containerPort: 3000

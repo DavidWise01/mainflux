@@ -1,0 +1,18 @@
+#! webhooks-expose.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Service
+metadata:
+    name: webhooks
+    namespace: docker
+    labels:
+        com.docker.compose.project: docker
+        com.docker.compose.service: webhooks
+spec:
+    selector:
+        com.docker.compose.project: docker
+        com.docker.compose.service: webhooks
+    ports:
+        - name: webhooks-9021
+          port: 9021
+          targetPort: webhooks-9021

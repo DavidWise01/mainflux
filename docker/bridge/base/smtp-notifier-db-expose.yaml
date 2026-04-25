@@ -1,0 +1,18 @@
+#! smtp-notifier-db-expose.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Service
+metadata:
+    name: smtp-notifier-db
+    namespace: docker
+    labels:
+        com.docker.compose.project: docker
+        com.docker.compose.service: smtp-notifier-db
+spec:
+    selector:
+        com.docker.compose.project: docker
+        com.docker.compose.service: smtp-notifier-db
+    ports:
+        - name: smtp-notif-5432
+          port: 5432
+          targetPort: smtp-notif-5432

@@ -1,0 +1,18 @@
+#! users-db-mainfluxlabs-users-db-volume-persistentVolumeClaim.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+    name: users-db-mainfluxlabs-users-db-volume
+    namespace: docker
+    labels:
+        com.docker.compose.service: users-db
+        com.docker.compose.volume: mainfluxlabs-users-db-volume
+spec:
+    accessModes:
+        # TODO would need to check which services use this volume
+        - ReadWriteOnce
+    volumeMode: Filesystem
+    resources:
+        requests:
+            storage: 100Mi

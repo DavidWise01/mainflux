@@ -1,0 +1,29 @@
+#! things-service.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Service
+metadata:
+    name: things-published
+    namespace: docker
+    labels:
+        com.docker.compose.project: docker
+        com.docker.compose.service: things
+spec:
+    selector:
+        com.docker.compose.project: docker
+        com.docker.compose.service: things
+    ports:
+        - name: things-8182
+          port: 8182
+          protocol: TCP
+          targetPort: things-8182
+        - name: things-8989
+          port: 8989
+          protocol: TCP
+          targetPort: things-8989
+        - name: things-8183
+          port: 8183
+          protocol: TCP
+          targetPort: things-8183
+
+# check if there is at least one published port

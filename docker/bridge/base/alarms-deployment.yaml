@@ -1,0 +1,64 @@
+#! alarms-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: alarms
+    namespace: docker
+    labels:
+        com.docker.compose.project: docker
+        com.docker.compose.service: alarms
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            com.docker.compose.project: docker
+            com.docker.compose.service: alarms
+    strategy:
+        type: Recreate
+    template:
+        metadata:
+            labels:
+                com.docker.compose.project: docker
+                com.docker.compose.service: alarms
+                com.docker.compose.network.mainfluxlabs-base-net: "true"
+        spec:
+            restartPolicy: OnFailure
+            containers:
+                - name: mainfluxlabs-alarms
+                  image: mainfluxlabs/alarms:v0.39.0
+                  imagePullPolicy: IfNotPresent
+                  env:
+                    - name: MF_ALARMS_DB
+                      value: "alarms"
+                    - name: MF_ALARMS_DB_HOST
+                      value: "alarms-db"
+                    - name: MF_ALARMS_DB_PASS
+                      value: "mainflux"
+                    - name: MF_ALARMS_DB_PORT
+                      value: "5432"
+                    - name: MF_ALARMS_DB_USER
+                      value: "mainflux"
+                    - name: MF_ALARMS_ES_URL
+                      value: "redis://es-redis:6379/0"
+                    - name: MF_ALARMS_EVENT_CONSUMER
+                      value: "alarms"
+                    - name: MF_ALARMS_HTTP_PORT
+                      value: "9026"
+                    - name: MF_ALARMS_LOG_LEVEL
+                      value: "debug"
+                    - name: MF_ALARMS_SERVER_CERT
+                      value: ""
+                    - name: MF_ALARMS_SERVER_KEY
+                      value: ""
+                    - name: MF_BROKER_URL
+                      value: "nats://broker:4222"
+                    - name: MF_JAEGER_URL
+                      value: "jaeger:6831"
+                    - name: MF_THINGS_AUTH_GRPC_TIMEOUT
+                      value: "1s"
+                    - name: MF_THINGS_AUTH_GRPC_URL
+                      value: "things:8183"
+                  ports:
+                    - name: alarms-9026
+                      containerPort: 9026

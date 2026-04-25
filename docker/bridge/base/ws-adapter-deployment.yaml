@@ -1,0 +1,46 @@
+#! ws-adapter-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: ws-adapter
+    namespace: docker
+    labels:
+        com.docker.compose.project: docker
+        com.docker.compose.service: ws-adapter
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            com.docker.compose.project: docker
+            com.docker.compose.service: ws-adapter
+    strategy:
+        type: Recreate
+    template:
+        metadata:
+            labels:
+                com.docker.compose.project: docker
+                com.docker.compose.service: ws-adapter
+                com.docker.compose.network.mainfluxlabs-base-net: "true"
+        spec:
+            restartPolicy: OnFailure
+            containers:
+                - name: mainfluxlabs-ws
+                  image: mainfluxlabs/ws:v0.39.0
+                  imagePullPolicy: IfNotPresent
+                  env:
+                    - name: MF_BROKER_URL
+                      value: "nats://broker:4222"
+                    - name: MF_JAEGER_URL
+                      value: "jaeger:6831"
+                    - name: MF_THINGS_AUTH_GRPC_TIMEOUT
+                      value: "1s"
+                    - name: MF_THINGS_AUTH_GRPC_URL
+                      value: "things:8183"
+                    - name: MF_WS_ADAPTER_LOG_LEVEL
+                      value: "debug"
+                    - name: MF_WS_ADAPTER_PORT
+                      value: "8190"
+                  ports:
+                    - name: ws-adapter-8190
+                      containerPort: 8190

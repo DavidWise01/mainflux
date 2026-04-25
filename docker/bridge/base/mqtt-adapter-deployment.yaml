@@ -1,0 +1,84 @@
+#! mqtt-adapter-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: mqtt-adapter
+    namespace: docker
+    labels:
+        com.docker.compose.project: docker
+        com.docker.compose.service: mqtt-adapter
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            com.docker.compose.project: docker
+            com.docker.compose.service: mqtt-adapter
+    strategy:
+        type: Recreate
+    template:
+        metadata:
+            labels:
+                com.docker.compose.project: docker
+                com.docker.compose.service: mqtt-adapter
+                com.docker.compose.network.mainfluxlabs-base-net: "true"
+        spec:
+            restartPolicy: OnFailure
+            containers:
+                - name: mainfluxlabs-mqtt
+                  image: mainfluxlabs/mqtt:v0.39.0
+                  imagePullPolicy: IfNotPresent
+                  env:
+                    - name: MF_AUTH_CACHE_URL
+                      value: "redis://auth-redis:6379/0"
+                    - name: MF_AUTH_GRPC_URL
+                      value: "auth:8181"
+                    - name: MF_BROKER_URL
+                      value: "nats://broker:4222"
+                    - name: MF_JAEGER_URL
+                      value: "jaeger:6831"
+                    - name: MF_MQTT_ADAPTER_DB
+                      value: "subscriptions"
+                    - name: MF_MQTT_ADAPTER_DB_HOST
+                      value: "mqtt-db"
+                    - name: MF_MQTT_ADAPTER_DB_PASS
+                      value: "mainflux"
+                    - name: MF_MQTT_ADAPTER_DB_PORT
+                      value: "5432"
+                    - name: MF_MQTT_ADAPTER_DB_SSL_CERT
+                      value: ""
+                    - name: MF_MQTT_ADAPTER_DB_SSL_MODE
+                      value: "disable"
+                    - name: MF_MQTT_ADAPTER_DB_USER
+                      value: "mainflux"
+                    - name: MF_MQTT_ADAPTER_ES_URL
+                      value: "redis://es-redis:6379/0"
+                    - name: MF_MQTT_ADAPTER_EVENT_CONSUMER
+                      value: "mqtt-adapter"
+                    - name: MF_MQTT_ADAPTER_FORWARDER
+                      value: "true"
+                    - name: MF_MQTT_ADAPTER_HTTP_PORT
+                      value: "8285"
+                    - name: MF_MQTT_ADAPTER_LOG_LEVEL
+                      value: "debug"
+                    - name: MF_MQTT_ADAPTER_MQTT_PORT
+                      value: "1883"
+                    - name: MF_MQTT_ADAPTER_MQTT_TARGET_HEALTH_CHECK
+                      value: ""
+                    - name: MF_MQTT_ADAPTER_MQTT_TARGET_HOST
+                      value: "mosquitto"
+                    - name: MF_MQTT_ADAPTER_MQTT_TARGET_PORT
+                      value: "1883"
+                    - name: MF_MQTT_ADAPTER_WS_PORT
+                      value: "8080"
+                    - name: MF_MQTT_ADAPTER_WS_TARGET_HOST
+                      value: "mosquitto"
+                    - name: MF_MQTT_ADAPTER_WS_TARGET_PORT
+                      value: "8080"
+                    - name: MF_THINGS_AUTH_GRPC_TIMEOUT
+                      value: "1s"
+                    - name: MF_THINGS_AUTH_GRPC_URL
+                      value: "things:8183"
+                  ports:
+                    - name: mqtt-adapt-8285
+                      containerPort: 8285

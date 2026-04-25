@@ -1,0 +1,70 @@
+#! postgres-reader-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: postgres-reader
+    namespace: docker
+    labels:
+        com.docker.compose.project: docker
+        com.docker.compose.service: postgres-reader
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            com.docker.compose.project: docker
+            com.docker.compose.service: postgres-reader
+    strategy:
+        type: Recreate
+    template:
+        metadata:
+            labels:
+                com.docker.compose.project: docker
+                com.docker.compose.service: postgres-reader
+                com.docker.compose.network.mainfluxlabs-base-net: "true"
+        spec:
+            restartPolicy: OnFailure
+            containers:
+                - name: mainfluxlabs-postgres-reader
+                  image: mainfluxlabs/postgres-reader:v0.39.0
+                  imagePullPolicy: IfNotPresent
+                  env:
+                    - name: MF_AUTH_GRPC_TIMEOUT
+                      value: "1s"
+                    - name: MF_AUTH_GRPC_URL
+                      value: "auth:8181"
+                    - name: MF_JAEGER_URL
+                      value: "jaeger:6831"
+                    - name: MF_POSTGRES_READER_CA_CERTS
+                      value: ""
+                    - name: MF_POSTGRES_READER_CLIENT_TLS
+                      value: "false"
+                    - name: MF_POSTGRES_READER_DB
+                      value: "mainflux"
+                    - name: MF_POSTGRES_READER_DB_HOST
+                      value: "postgres"
+                    - name: MF_POSTGRES_READER_DB_PASS
+                      value: "mainflux"
+                    - name: MF_POSTGRES_READER_DB_PORT
+                      value: "5432"
+                    - name: MF_POSTGRES_READER_DB_SSL_CERT
+                      value: ""
+                    - name: MF_POSTGRES_READER_DB_SSL_KEY
+                      value: ""
+                    - name: MF_POSTGRES_READER_DB_SSL_MODE
+                      value: "disable"
+                    - name: MF_POSTGRES_READER_DB_SSL_ROOT_CERT
+                      value: ""
+                    - name: MF_POSTGRES_READER_DB_USER
+                      value: "mainflux"
+                    - name: MF_POSTGRES_READER_LOG_LEVEL
+                      value: "debug"
+                    - name: MF_POSTGRES_READER_PORT
+                      value: "8905"
+                    - name: MF_THINGS_AUTH_GRPC_TIMEOUT
+                      value: "1s"
+                    - name: MF_THINGS_AUTH_GRPC_URL
+                      value: "things:8183"
+                  ports:
+                    - name: postgres-r-8905
+                      containerPort: 8905

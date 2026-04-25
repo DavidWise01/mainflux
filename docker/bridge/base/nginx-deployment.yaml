@@ -1,0 +1,689 @@
+#! nginx-deployment.yaml
+# Generated code, do not edit
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: nginx
+    namespace: docker
+    labels:
+        com.docker.compose.project: docker
+        com.docker.compose.service: nginx
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            com.docker.compose.project: docker
+            com.docker.compose.service: nginx
+    strategy:
+        type: Recreate
+    template:
+        metadata:
+            labels:
+                com.docker.compose.project: docker
+                com.docker.compose.service: nginx
+                com.docker.compose.network.mainfluxlabs-base-net: "true"
+        spec:
+            restartPolicy: OnFailure
+            containers:
+                - name: mainfluxlabs-nginx
+                  image: nginx:1.20.0-alpine
+                  imagePullPolicy: IfNotPresent
+                  env:
+                    - name: MF_ALARMS_CA_CERTS
+                      value: ""
+                    - name: MF_ALARMS_CLIENT_TLS
+                      value: "false"
+                    - name: MF_ALARMS_DB
+                      value: "alarms"
+                    - name: MF_ALARMS_DB_PASS
+                      value: "mainflux"
+                    - name: MF_ALARMS_DB_PORT
+                      value: "5432"
+                    - name: MF_ALARMS_DB_USER
+                      value: "mainflux"
+                    - name: MF_ALARMS_ES_URL
+                      value: "redis://es-redis:6379/0"
+                    - name: MF_ALARMS_EVENT_CONSUMER
+                      value: "alarms"
+                    - name: MF_ALARMS_HTTP_PORT
+                      value: "9026"
+                    - name: MF_ALARMS_LOG_LEVEL
+                      value: "debug"
+                    - name: MF_ALARMS_SERVER_CERT
+                      value: ""
+                    - name: MF_ALARMS_SERVER_KEY
+                      value: ""
+                    - name: MF_AUTH_DB
+                      value: "auth"
+                    - name: MF_AUTH_DB_PASS
+                      value: "mainflux"
+                    - name: MF_AUTH_DB_PORT
+                      value: "5432"
+                    - name: MF_AUTH_DB_USER
+                      value: "mainflux"
+                    - name: MF_AUTH_ES_URL
+                      value: "redis://localhost:6379/0"
+                    - name: MF_AUTH_GRPC_PORT
+                      value: "8181"
+                    - name: MF_AUTH_GRPC_TIMEOUT
+                      value: "1s"
+                    - name: MF_AUTH_GRPC_URL
+                      value: "auth:8181"
+                    - name: MF_AUTH_HTTP_PORT
+                      value: "8189"
+                    - name: MF_AUTH_LOGIN_TOKEN_DURATION
+                      value: "10h"
+                    - name: MF_AUTH_LOG_LEVEL
+                      value: "debug"
+                    - name: MF_AUTH_SECRET
+                      value: "secret"
+                    - name: MF_BROKER_TYPE
+                      value: "nats"
+                    - name: MF_BROKER_URL
+                      value: "nats://broker:4222"
+                    - name: MF_CERTS_CA_CERTS
+                      value: ""
+                    - name: MF_CERTS_CLIENT_TLS
+                      value: ""
+                    - name: MF_CERTS_CRL_PATH
+                      value: "/etc/ssl/certs/crl/crl.pem"
+                    - name: MF_CERTS_DB
+                      value: "certs"
+                    - name: MF_CERTS_DB_HOST
+                      value: "certs-db"
+                    - name: MF_CERTS_DB_PASS
+                      value: "mainflux"
+                    - name: MF_CERTS_DB_PORT
+                      value: "5432"
+                    - name: MF_CERTS_DB_SSL_CERT
+                      value: ""
+                    - name: MF_CERTS_DB_SSL_KEY
+                      value: ""
+                    - name: MF_CERTS_DB_SSL_MODE
+                      value: ""
+                    - name: MF_CERTS_DB_SSL_ROOT_CERT
+                      value: ""
+                    - name: MF_CERTS_DB_USER
+                      value: "mainflux"
+                    - name: MF_CERTS_ENCRYPT_KEY
+                      value: ""
+                    - name: MF_CERTS_HTTP_PORT
+                      value: "8204"
+                    - name: MF_CERTS_LOG_LEVEL
+                      value: "debug"
+                    - name: MF_CERTS_SERVER_CERT
+                      value: ""
+                    - name: MF_CERTS_SERVER_KEY
+                      value: ""
+                    - name: MF_CERTS_SIGN_CA_KEY_PATH
+                      value: "/etc/ssl/certs/ca.key"
+                    - name: MF_CERTS_SIGN_CA_PATH
+                      value: "/etc/ssl/certs/ca.crt"
+                    - name: MF_CERTS_SIGN_HOURS_VALID
+                      value: "2048h"
+                    - name: MF_CERTS_SIGN_RSA_BITS
+                      value: "2048"
+                    - name: MF_COAP_ADAPTER_LOG_LEVEL
+                      value: "debug"
+                    - name: MF_COAP_ADAPTER_PORT
+                      value: "5683"
+                    - name: MF_CONVERTERS_CA_CERTS
+                      value: ""
+                    - name: MF_CONVERTERS_CLIENT_TLS
+                      value: "false"
+                    - name: MF_CONVERTERS_LOG_LEVEL
+                      value: "debug"
+                    - name: MF_CONVERTERS_PORT
+                      value: "8195"
+                    - name: MF_DOWNLINKS_CA_CERTS
+                      value: ""
+                    - name: MF_DOWNLINKS_CLIENT_TLS
+                      value: "false"
+                    - name: MF_DOWNLINKS_DB
+                      value: "downlinks"
+                    - name: MF_DOWNLINKS_DB_PASS
+                      value: "mainflux"
+                    - name: MF_DOWNLINKS_DB_PORT
+                      value: "5432"
+                    - name: MF_DOWNLINKS_DB_USER
+                      value: "mainflux"
+                    - name: MF_DOWNLINKS_ES_URL
+                      value: "redis://es-redis:6379/0"
+                    - name: MF_DOWNLINKS_EVENT_CONSUMER
+                      value: "downlinks"
+                    - name: MF_DOWNLINKS_HTTP_PORT
+                      value: "9025"
+                    - name: MF_DOWNLINKS_LOG_LEVEL
+                      value: "debug"
+                    - name: MF_DOWNLINKS_SERVER_CERT
+                      value: ""
+                    - name: MF_DOWNLINKS_SERVER_KEY
+                      value: ""
+                    - name: MF_EMAIL_FROM_ADDRESS
+                      value: "from@example.com"
+                    - name: MF_EMAIL_FROM_NAME
+                      value: "Example"
+                    - name: MF_EMAIL_HOST
+                      value: "smtp.mailtrap.io"
+                    - name: MF_EMAIL_PASSWORD
+                      value: "12345678"
+                    - name: MF_EMAIL_PORT
+                      value: "2525"
+                    - name: MF_EMAIL_TEMPLATES_DIR
+                      value: "/"
+                    - name: MF_EMAIL_USERNAME
+                      value: "example@example.com"
+                    - name: MF_FILESTORE_CA_CERTS
+                      value: ""
+                    - name: MF_FILESTORE_DB
+                      value: "filestore"
+                    - name: MF_FILESTORE_DB_HOST
+                      value: "filestore-db"
+                    - name: MF_FILESTORE_DB_PASS
+                      value: "mainflux"
+                    - name: MF_FILESTORE_DB_PORT
+                      value: "5432"
+                    - name: MF_FILESTORE_DB_SSL_CERT
+                      value: ""
+                    - name: MF_FILESTORE_DB_SSL_MODE
+                      value: "disable"
+                    - name: MF_FILESTORE_DB_USER
+                      value: "mainflux"
+                    - name: MF_FILESTORE_ES_URL
+                      value: "redis://es-redis:6379/0"
+                    - name: MF_FILESTORE_EVENT_CONSUMER
+                      value: "filestore"
+                    - name: MF_FILESTORE_HTTP_PORT
+                      value: "9022"
+                    - name: MF_FILESTORE_LOG_LEVEL
+                      value: "debug"
+                    - name: MF_FILESTORE_SECRET
+                      value: "secret"
+                    - name: MF_FILESTORE_SERVER_CERT
+                      value: ""
+                    - name: MF_FILESTORE_SERVER_KEY
+                      value: ""
+                    - name: MF_FILESTORE_TLS
+                      value: "false"
+                    - name: MF_GITHUB_CLIENT_ID
+                      value: "github-client-id"
+                    - name: MF_GITHUB_CLIENT_SECRET
+                      value: "github-client-secret"
+                    - name: MF_GITHUB_REDIRECT_URL
+                      value: "/users/oauth/github/callback"
+                    - name: MF_GITHUB_USER_EMAILS
+                      value: "https://api.github.com/user/emails"
+                    - name: MF_GITHUB_USER_INFO
+                      value: "https://api.github.com/user"
+                    - name: MF_GOOGLE_CLIENT_ID
+                      value: "google-client-id.apps.googleusercontent.com"
+                    - name: MF_GOOGLE_CLIENT_SECRET
+                      value: "google-client-secret"
+                    - name: MF_GOOGLE_REDIRECT_URL
+                      value: "/users/oauth/google/callback"
+                    - name: MF_GOOGLE_USER_INFO
+                      value: "https://www.googleapis.com/oauth2/v2/userinfo"
+                    - name: MF_GRAFANA_PORT
+                      value: "3000"
+                    - name: MF_HOST
+                      value: "http://localhost"
+                    - name: MF_HTTP_ADAPTER_PORT
+                      value: "8185"
+                    - name: MF_INVITE_DURATION
+                      value: "168h"
+                    - name: MF_JAEGER_COLLECTOR
+                      value: "14268"
+                    - name: MF_JAEGER_CONFIGS
+                      value: "5778"
+                    - name: MF_JAEGER_FRONTEND
+                      value: "16686"
+                    - name: MF_JAEGER_PORT
+                      value: "6831"
+                    - name: MF_JAEGER_URL
+                      value: "jaeger:6831"
+                    - name: MF_MODBUS_CA_CERTS
+                      value: ""
+                    - name: MF_MODBUS_CLIENT_TLS
+                      value: "false"
+                    - name: MF_MODBUS_DB
+                      value: "modbus"
+                    - name: MF_MODBUS_DB_PASS
+                      value: "mainflux"
+                    - name: MF_MODBUS_DB_PORT
+                      value: "5432"
+                    - name: MF_MODBUS_DB_USER
+                      value: "mainflux"
+                    - name: MF_MODBUS_ES_URL
+                      value: "redis://es-redis:6379/0"
+                    - name: MF_MODBUS_EVENT_CONSUMER
+                      value: "modbus"
+                    - name: MF_MODBUS_HTTP_PORT
+                      value: "9028"
+                    - name: MF_MODBUS_LOG_LEVEL
+                      value: "debug"
+                    - name: MF_MODBUS_SERVER_CERT
+                      value: ""
+                    - name: MF_MODBUS_SERVER_KEY
+                      value: ""
+                    - name: MF_MQTT_ADAPTER_DB
+                      value: "subscriptions"
+                    - name: MF_MQTT_ADAPTER_DB_HOST
+                      value: "mqtt-db"
+                    - name: MF_MQTT_ADAPTER_DB_PASS
+                      value: "mainflux"
+                    - name: MF_MQTT_ADAPTER_DB_PORT
+                      value: "5432"
+                    - name: MF_MQTT_ADAPTER_DB_SSL_CERT
+                      value: ""
+                    - name: MF_MQTT_ADAPTER_DB_SSL_MODE
+                      value: "disable"
+                    - name: MF_MQTT_ADAPTER_DB_USER
+                      value: "mainflux"
+                    - name: MF_MQTT_ADAPTER_ES_URL
+                      value: "redis://es-redis:6379/0"
+                    - name: MF_MQTT_ADAPTER_EVENT_CONSUMER
+                      value: "mqtt-adapter"
+                    - name: MF_MQTT_ADAPTER_FORWARDER
+                      value: "true"
+                    - name: MF_MQTT_ADAPTER_HTTP_PORT
+                      value: "8285"
+                    - name: MF_MQTT_ADAPTER_LOG_LEVEL
+                      value: "debug"
+                    - name: MF_MQTT_ADAPTER_MQTT_PORT
+                      value: "1883"
+                    - name: MF_MQTT_ADAPTER_WS_PORT
+                      value: "8080"
+                    - name: MF_MQTT_BROKER_PORT
+                      value: "1883"
+                    - name: MF_MQTT_BROKER_WS_PORT
+                      value: "8080"
+                    - name: MF_NATS_PORT
+                      value: "4222"
+                    - name: MF_NATS_URL
+                      value: "nats://broker:4222"
+                    - name: MF_NGINX_HTTP_PORT
+                      value: "80"
+                    - name: MF_NGINX_MQTTS_PORT
+                      value: "8883"
+                    - name: MF_NGINX_MQTT_PORT
+                      value: "1883"
+                    - name: MF_NGINX_SSL_PORT
+                      value: "443"
+                    - name: MF_POSTGRES_READER_CA_CERTS
+                      value: ""
+                    - name: MF_POSTGRES_READER_CLIENT_TLS
+                      value: "false"
+                    - name: MF_POSTGRES_READER_DB
+                      value: "mainflux"
+                    - name: MF_POSTGRES_READER_DB_PASS
+                      value: "mainflux"
+                    - name: MF_POSTGRES_READER_DB_PORT
+                      value: "5432"
+                    - name: MF_POSTGRES_READER_DB_SSL_CERT
+                      value: ""
+                    - name: MF_POSTGRES_READER_DB_SSL_KEY
+                      value: ""
+                    - name: MF_POSTGRES_READER_DB_SSL_MODE
+                      value: "disable"
+                    - name: MF_POSTGRES_READER_DB_SSL_ROOT_CERT
+                      value: ""
+                    - name: MF_POSTGRES_READER_DB_USER
+                      value: "mainflux"
+                    - name: MF_POSTGRES_READER_LOG_LEVEL
+                      value: "debug"
+                    - name: MF_POSTGRES_READER_PORT
+                      value: "8905"
+                    - name: MF_POSTGRES_WRITER_DB
+                      value: "mainflux"
+                    - name: MF_POSTGRES_WRITER_DB_PASS
+                      value: "mainflux"
+                    - name: MF_POSTGRES_WRITER_DB_PORT
+                      value: "5432"
+                    - name: MF_POSTGRES_WRITER_DB_SSL_CERT
+                      value: ""
+                    - name: MF_POSTGRES_WRITER_DB_SSL_KEY
+                      value: ""
+                    - name: MF_POSTGRES_WRITER_DB_SSL_MODE
+                      value: "disable"
+                    - name: MF_POSTGRES_WRITER_DB_SSL_ROOT_CERT
+                      value: ""
+                    - name: MF_POSTGRES_WRITER_DB_USER
+                      value: "mainflux"
+                    - name: MF_POSTGRES_WRITER_LOG_LEVEL
+                      value: "debug"
+                    - name: MF_POSTGRES_WRITER_PORT
+                      value: "8900"
+                    - name: MF_RABBITMQ_COOKIE
+                      value: "mainflux"
+                    - name: MF_RABBITMQ_HTTP_PORT
+                      value: "15672"
+                    - name: MF_RABBITMQ_PASS
+                      value: "mainflux"
+                    - name: MF_RABBITMQ_PORT
+                      value: "5672"
+                    - name: MF_RABBITMQ_URL
+                      value: "amqp://mainflux:mainflux@broker:5672/"
+                    - name: MF_RABBITMQ_USER
+                      value: "mainflux"
+                    - name: MF_RABBITMQ_VHOST
+                      value: "/"
+                    - name: MF_REDIRECT_LOGIN_URL
+                      value: "/auth/login"
+                    - name: MF_REDIS_TCP_PORT
+                      value: "6379"
+                    - name: MF_RELEASE_PREFIX
+                      value: "mainfluxlabs"
+                    - name: MF_RELEASE_TAG
+                      value: "v0.39.0"
+                    - name: MF_REQUIRE_EMAIL_VERIFICATION
+                      value: "false"
+                    - name: MF_RULES_CA_CERTS
+                      value: ""
+                    - name: MF_RULES_CLIENT_TLS
+                      value: "false"
+                    - name: MF_RULES_DB
+                      value: "rules"
+                    - name: MF_RULES_DB_PASS
+                      value: "mainflux"
+                    - name: MF_RULES_DB_PORT
+                      value: "5432"
+                    - name: MF_RULES_DB_USER
+                      value: "mainflux"
+                    - name: MF_RULES_ES_URL
+                      value: "redis://es-redis:6379/0"
+                    - name: MF_RULES_EVENT_CONSUMER
+                      value: "rules"
+                    - name: MF_RULES_HTTP_PORT
+                      value: "9027"
+                    - name: MF_RULES_LOG_LEVEL
+                      value: "debug"
+                    - name: MF_RULES_SCRIPTS_ENABLED
+                      value: "false"
+                    - name: MF_RULES_SERVER_CERT
+                      value: ""
+                    - name: MF_RULES_SERVER_KEY
+                      value: ""
+                    - name: MF_SMPP_ADDRESS
+                      value: "localhost:2775"
+                    - name: MF_SMPP_DST_ADDR_NPI
+                      value: "1"
+                    - name: MF_SMPP_DST_ADDR_TON
+                      value: "1"
+                    - name: MF_SMPP_NOTIFIER_DB
+                      value: "smpp-notifiers"
+                    - name: MF_SMPP_NOTIFIER_DB_PASS
+                      value: "mainflux"
+                    - name: MF_SMPP_NOTIFIER_DB_PORT
+                      value: "5432"
+                    - name: MF_SMPP_NOTIFIER_DB_USER
+                      value: "mainflux"
+                    - name: MF_SMPP_NOTIFIER_ES_URL
+                      value: "redis://es-redis:6379/0"
+                    - name: MF_SMPP_NOTIFIER_EVENT_CONSUMER
+                      value: "smpp-notifier"
+                    - name: MF_SMPP_NOTIFIER_LOG_LEVEL
+                      value: "debug"
+                    - name: MF_SMPP_NOTIFIER_PORT
+                      value: "9024"
+                    - name: MF_SMPP_NOTIFIER_SERVER_CERT
+                      value: ""
+                    - name: MF_SMPP_NOTIFIER_SERVER_KEY
+                      value: ""
+                    - name: MF_SMPP_NOTIFIER_SOURCE_ADDR
+                      value: ""
+                    - name: MF_SMPP_NOTIFIER_THINGS_CA_CERTS
+                      value: ""
+                    - name: MF_SMPP_NOTIFIER_THINGS_TLS
+                      value: "false"
+                    - name: MF_SMPP_PASSWORD
+                      value: ""
+                    - name: MF_SMPP_SRC_ADDR_NPI
+                      value: "0"
+                    - name: MF_SMPP_SRC_ADDR_TON
+                      value: "5"
+                    - name: MF_SMPP_SYSTEM_TYPE
+                      value: ""
+                    - name: MF_SMPP_USERNAME
+                      value: ""
+                    - name: MF_SMTP_NOTIFIER_DB
+                      value: "smtp-notifiers"
+                    - name: MF_SMTP_NOTIFIER_DB_PASS
+                      value: "mainflux"
+                    - name: MF_SMTP_NOTIFIER_DB_PORT
+                      value: "5432"
+                    - name: MF_SMTP_NOTIFIER_DB_USER
+                      value: "mainflux"
+                    - name: MF_SMTP_NOTIFIER_ES_URL
+                      value: "redis://es-redis:6379/0"
+                    - name: MF_SMTP_NOTIFIER_EVENT_CONSUMER
+                      value: "smtp-notifier"
+                    - name: MF_SMTP_NOTIFIER_FROM_ADDR
+                      value: "example@example.com"
+                    - name: MF_SMTP_NOTIFIER_LOG_LEVEL
+                      value: "debug"
+                    - name: MF_SMTP_NOTIFIER_PORT
+                      value: "9023"
+                    - name: MF_SMTP_NOTIFIER_SERVER_CERT
+                      value: ""
+                    - name: MF_SMTP_NOTIFIER_SERVER_KEY
+                      value: ""
+                    - name: MF_SMTP_NOTIFIER_THINGS_CA_CERTS
+                      value: ""
+                    - name: MF_SMTP_NOTIFIER_THINGS_TLS
+                      value: "false"
+                    - name: MF_THINGS_AUTH_GRPC_PORT
+                      value: "8183"
+                    - name: MF_THINGS_AUTH_GRPC_TIMEOUT
+                      value: "1s"
+                    - name: MF_THINGS_AUTH_GRPC_URL
+                      value: "things:8183"
+                    - name: MF_THINGS_AUTH_HTTP_PORT
+                      value: "8989"
+                    - name: MF_THINGS_CA_CERTS
+                      value: ""
+                    - name: MF_THINGS_CLIENT_TLS
+                      value: "false"
+                    - name: MF_THINGS_DB
+                      value: "things"
+                    - name: MF_THINGS_DB_PASS
+                      value: "mainflux"
+                    - name: MF_THINGS_DB_PORT
+                      value: "5432"
+                    - name: MF_THINGS_DB_USER
+                      value: "mainflux"
+                    - name: MF_THINGS_ES_URL
+                      value: "redis://localhost:6379/0"
+                    - name: MF_THINGS_EVENT_CONSUMER
+                      value: "things"
+                    - name: MF_THINGS_GRPC_TIMEOUT
+                      value: "1s"
+                    - name: MF_THINGS_GRPC_URL
+                      value: "things:8183"
+                    - name: MF_THINGS_HTTP_PORT
+                      value: "8182"
+                    - name: MF_THINGS_LOG_LEVEL
+                      value: "debug"
+                    - name: MF_TIMESCALE_READER_CA_CERTS
+                      value: ""
+                    - name: MF_TIMESCALE_READER_CLIENT_TLS
+                      value: "false"
+                    - name: MF_TIMESCALE_READER_DB
+                      value: "mainflux"
+                    - name: MF_TIMESCALE_READER_DB_PASS
+                      value: "mainflux"
+                    - name: MF_TIMESCALE_READER_DB_PORT
+                      value: "5432"
+                    - name: MF_TIMESCALE_READER_DB_SSL_CERT
+                      value: ""
+                    - name: MF_TIMESCALE_READER_DB_SSL_KEY
+                      value: ""
+                    - name: MF_TIMESCALE_READER_DB_SSL_MODE
+                      value: "disable"
+                    - name: MF_TIMESCALE_READER_DB_SSL_ROOT_CERT
+                      value: ""
+                    - name: MF_TIMESCALE_READER_DB_USER
+                      value: "mainflux"
+                    - name: MF_TIMESCALE_READER_LOG_LEVEL
+                      value: "debug"
+                    - name: MF_TIMESCALE_READER_PORT
+                      value: "8905"
+                    - name: MF_TIMESCALE_WRITER_DB
+                      value: "mainflux"
+                    - name: MF_TIMESCALE_WRITER_DB_PASS
+                      value: "mainflux"
+                    - name: MF_TIMESCALE_WRITER_DB_PORT
+                      value: "5432"
+                    - name: MF_TIMESCALE_WRITER_DB_SSL_CERT
+                      value: ""
+                    - name: MF_TIMESCALE_WRITER_DB_SSL_KEY
+                      value: ""
+                    - name: MF_TIMESCALE_WRITER_DB_SSL_MODE
+                      value: "disable"
+                    - name: MF_TIMESCALE_WRITER_DB_SSL_ROOT_CERT
+                      value: ""
+                    - name: MF_TIMESCALE_WRITER_DB_USER
+                      value: "mainflux"
+                    - name: MF_TIMESCALE_WRITER_LOG_LEVEL
+                      value: "debug"
+                    - name: MF_TIMESCALE_WRITER_PORT
+                      value: "8900"
+                    - name: MF_UI_CONFIGS_CA_CERTS
+                      value: ""
+                    - name: MF_UI_CONFIGS_CLIENT_TLS
+                      value: "false"
+                    - name: MF_UI_CONFIGS_DB
+                      value: "uiconfigs"
+                    - name: MF_UI_CONFIGS_DB_PASS
+                      value: "mainflux"
+                    - name: MF_UI_CONFIGS_DB_PORT
+                      value: "5432"
+                    - name: MF_UI_CONFIGS_DB_USER
+                      value: "mainflux"
+                    - name: MF_UI_CONFIGS_ES_URL
+                      value: "redis://es-redis:6379/0"
+                    - name: MF_UI_CONFIGS_EVENT_CONSUMER
+                      value: "uiconfigs"
+                    - name: MF_UI_CONFIGS_HTTP_PORT
+                      value: "9029"
+                    - name: MF_UI_CONFIGS_LOG_LEVEL
+                      value: "debug"
+                    - name: MF_UI_CONFIGS_SERVER_CERT
+                      value: ""
+                    - name: MF_UI_CONFIGS_SERVER_KEY
+                      value: ""
+                    - name: MF_UI_PORT
+                      value: "3000"
+                    - name: MF_USERS_ADMIN_EMAIL
+                      value: "admin@example.com"
+                    - name: MF_USERS_ADMIN_PASSWORD
+                      value: "12345678"
+                    - name: MF_USERS_CA_CERTS
+                      value: ""
+                    - name: MF_USERS_CLIENT_TLS
+                      value: "false"
+                    - name: MF_USERS_DB
+                      value: "users"
+                    - name: MF_USERS_DB_PASS
+                      value: "mainflux"
+                    - name: MF_USERS_DB_PORT
+                      value: "5432"
+                    - name: MF_USERS_DB_USER
+                      value: "mainflux"
+                    - name: MF_USERS_GRPC_PORT
+                      value: "8184"
+                    - name: MF_USERS_GRPC_URL
+                      value: "users:8184"
+                    - name: MF_USERS_HTTP_PORT
+                      value: "8180"
+                    - name: MF_USERS_LOG_LEVEL
+                      value: "debug"
+                    - name: MF_USERS_PASS_REGEX
+                      value: "^.{8,}$"
+                    - name: MF_USERS_SELF_REGISTER_ENABLED
+                      value: "true"
+                    - name: MF_WEBHOOKS_CA_CERTS
+                      value: ""
+                    - name: MF_WEBHOOKS_CLIENT_TLS
+                      value: "false"
+                    - name: MF_WEBHOOKS_DB
+                      value: "webhooks"
+                    - name: MF_WEBHOOKS_DB_PASS
+                      value: "mainflux"
+                    - name: MF_WEBHOOKS_DB_PORT
+                      value: "5432"
+                    - name: MF_WEBHOOKS_DB_USER
+                      value: "mainflux"
+                    - name: MF_WEBHOOKS_ES_URL
+                      value: "redis://es-redis:6379/0"
+                    - name: MF_WEBHOOKS_EVENT_CONSUMER
+                      value: "webhooks"
+                    - name: MF_WEBHOOKS_HTTP_PORT
+                      value: "9021"
+                    - name: MF_WEBHOOKS_LOG_LEVEL
+                      value: "debug"
+                    - name: MF_WEBHOOKS_SECRET
+                      value: "secret"
+                    - name: MF_WEBHOOKS_SERVER_CERT
+                      value: ""
+                    - name: MF_WEBHOOKS_SERVER_KEY
+                      value: ""
+                    - name: MF_WS_ADAPTER_LOG_LEVEL
+                      value: "debug"
+                    - name: MF_WS_ADAPTER_PORT
+                      value: "8190"
+                  ports:
+                    - name: nginx-443
+                      containerPort: 443
+                    - name: nginx-1883
+                      containerPort: 1883
+                    - name: nginx-8883
+                      containerPort: 8883
+                    - name: nginx-80
+                      containerPort: 80
+                  volumeMounts:
+                    - name: etc-nginx-nginx-conf-template
+                      mountPath: /etc/nginx/nginx.conf.template
+                    - name: docker-entrypoint-d-entrypoint-sh
+                      mountPath: /docker-entrypoint.d/entrypoint.sh
+                    - name: etc-nginx-snippets
+                      mountPath: /etc/nginx/snippets
+                    - name: etc-nginx-authorization-js
+                      mountPath: /etc/nginx/authorization.js
+                    - name: etc-ssl-certs-mainfluxlabs-server-crt
+                      mountPath: /etc/ssl/certs/mainfluxlabs-server.crt
+                    - name: etc-ssl-certs-ca-crt
+                      mountPath: /etc/ssl/certs/ca.crt
+                    - name: etc-ssl-private-mainfluxlabs-server-key
+                      mountPath: /etc/ssl/private/mainfluxlabs-server.key
+                    - name: etc-ssl-certs-dhparam-pem
+                      mountPath: /etc/ssl/certs/dhparam.pem
+                    - name: etc-ssl-certs-crl
+                      mountPath: /etc/ssl/certs/crl
+            volumes:
+                - name: etc-nginx-nginx-conf-template
+                  hostPath:
+                    path: C:\Users\Dave\Desktop\the-garden\mainflux\docker\nginx\nginx-key.conf
+                - name: docker-entrypoint-d-entrypoint-sh
+                  hostPath:
+                    path: C:\Users\Dave\Desktop\the-garden\mainflux\docker\nginx\entrypoint.sh
+                - name: etc-nginx-snippets
+                  hostPath:
+                    path: C:\Users\Dave\Desktop\the-garden\mainflux\docker\nginx\snippets
+                - name: etc-nginx-authorization-js
+                  hostPath:
+                    path: C:\Users\Dave\Desktop\the-garden\mainflux\docker\ssl\authorization.js
+                - name: etc-ssl-certs-mainfluxlabs-server-crt
+                  hostPath:
+                    path: C:\Users\Dave\Desktop\the-garden\mainflux\docker\ssl\certs\mainfluxlabs-server.crt
+                - name: etc-ssl-certs-ca-crt
+                  hostPath:
+                    path: C:\Users\Dave\Desktop\the-garden\mainflux\docker\ssl\certs\ca.crt
+                - name: etc-ssl-private-mainfluxlabs-server-key
+                  hostPath:
+                    path: C:\Users\Dave\Desktop\the-garden\mainflux\docker\ssl\certs\mainfluxlabs-server.key
+                - name: etc-ssl-certs-dhparam-pem
+                  hostPath:
+                    path: C:\Users\Dave\Desktop\the-garden\mainflux\docker\ssl\dhparam.pem
+                - name: etc-ssl-certs-crl
+                  persistentVolumeClaim:
+                    claimName: nginx-mainfluxlabs-crl-volume

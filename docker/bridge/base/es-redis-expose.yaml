@@ -1,0 +1,18 @@
+#! es-redis-expose.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Service
+metadata:
+    name: es-redis
+    namespace: docker
+    labels:
+        com.docker.compose.project: docker
+        com.docker.compose.service: es-redis
+spec:
+    selector:
+        com.docker.compose.project: docker
+        com.docker.compose.service: es-redis
+    ports:
+        - name: es-redis-6379
+          port: 6379
+          targetPort: es-redis-6379

@@ -1,0 +1,18 @@
+#! auth-redis-mainfluxlabs-auth-redis-volume-persistentVolumeClaim.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+    name: auth-redis-mainfluxlabs-auth-redis-volume
+    namespace: docker
+    labels:
+        com.docker.compose.service: auth-redis
+        com.docker.compose.volume: mainfluxlabs-auth-redis-volume
+spec:
+    accessModes:
+        # TODO would need to check which services use this volume
+        - ReadWriteOnce
+    volumeMode: Filesystem
+    resources:
+        requests:
+            storage: 100Mi

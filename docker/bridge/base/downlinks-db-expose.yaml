@@ -1,0 +1,18 @@
+#! downlinks-db-expose.yaml
+# Generated code, do not edit
+apiVersion: v1
+kind: Service
+metadata:
+    name: downlinks-db
+    namespace: docker
+    labels:
+        com.docker.compose.project: docker
+        com.docker.compose.service: downlinks-db
+spec:
+    selector:
+        com.docker.compose.project: docker
+        com.docker.compose.service: downlinks-db
+    ports:
+        - name: downlinks--5432
+          port: 5432
+          targetPort: downlinks--5432
